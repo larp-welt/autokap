@@ -7,6 +7,7 @@
 #ifndef AutoKAP_H_
 #define AutoKAP_H_
 #include "Arduino.h"
+#include <Servo.h>
 
 #include "def.h"
 #include "config.h"
@@ -14,8 +15,17 @@
 #include "configuration.h"
 #include "commands.h"
 #include "utils.h"
-#include <Servo.h>
 
+#define ACTION_TILT		0
+#define ACTION_SHOOT	1
+#define ACTION_ENDSH	2
+#define ACTION_PAN		3
+#define ACTION_PANEND	4
+
+Servo TiltServo, PanServo;
+unsigned long next = 0;
+char TiltPosition = 0;
+char NextAction = ACTION_TILT;
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,8 +37,6 @@ void setup();
 #endif
 
 //add your function definitions for the project AutoKAP here
-
-
 
 
 //Do not add code below this line

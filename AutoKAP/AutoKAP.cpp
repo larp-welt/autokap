@@ -1,18 +1,6 @@
 // Do not remove the include below
 #include "AutoKAP.h"
 
-#define ACTION_TILT		0
-#define ACTION_SHOOT	1
-#define ACTION_ENDSH	2
-#define ACTION_PAN		3
-#define ACTION_PANEND	4
-
-
-Servo TiltServo, PanServo;
-unsigned long next = 0;
-char TiltPosition = 0;
-char NextAction = ACTION_TILT;
-
 
 //The setup function is called once at startup of the sketch
 void setup()
@@ -27,16 +15,16 @@ void setup()
 	Serial.print(F("// AutoKAP V"));
 	Serial.println(VERSION);
 
-    SerialShell.addCommand("LED", ToggleLED);
+	SerialShell.addCommand("LED", ToggleLED);
 	SerialShell.addCommand("SHW", Show);
 	SerialShell.addCommand("PRT", Echo);
 	SerialShell.addCommand("WRT", Write);
 	SerialShell.addCommand("//", NoOp);
 	SerialShell.setDefaultHandler(UnknownCommand);
-    Serial.println(F("// - Serial communication started"));
+	Serial.println(F("// - Serial communication started"));
 
-    eepromReadConfiguration();
-    Serial.println(F("// - Configuration done"));
+	eepromReadConfiguration();
+	Serial.println(F("// - Configuration done"));
 
 
 	TiltServo.attach(TILT_SERVO);
