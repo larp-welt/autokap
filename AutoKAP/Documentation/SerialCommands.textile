@@ -1,0 +1,15 @@
+h1. Serial Commands
+
+h2. Connect to AutoKAP
+
+Connect your AutoKAP hardware to your computer and start serial console. Use a baud rate of 9600. Line end must be LF.
+
+h2. Commands
+
+You may use following commands on the serial console:
+
+|@//@|Marks a comment. Lines starting with @//@ will be ignored.|
+|@PRT <text>@|Prints out the the given text.|
+|@SHW RAM@|Shows the amount of still free RAM.|
+|@LED <ON/OFF/TOGGLE>@|Switchs the led on or off, or inverts it state. Used without any argument, it shows the current state.|
+|@WRT@|Writes the current configuration to EEPROM.|
