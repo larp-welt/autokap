@@ -17,6 +17,7 @@ struct config_t {
     int32_t signature;
     int16_t version;
     int16_t pause;
+    int16_t shoot;
     int16_t shotpause;
     int16_t pan;
     int16_t panspeed;

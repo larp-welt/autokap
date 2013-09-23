@@ -18,6 +18,7 @@ void eepromReadConfiguration() {
         config.signature = EEPROM_SIGNATURE;
         config.version = EEPROM_CONF_VERSION;
         config.pause = 2000;
+        config.shoot = 10;
         config.shotpause = 1000;
         config.pan = 1500;
         config.panspeed = 1700;

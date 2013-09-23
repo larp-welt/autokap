@@ -3,8 +3,9 @@
 
 #define ACTION_TILT		0
 #define ACTION_SHOOT	1
-#define ACTION_PAN		2
-#define ACTION_PANEND	3
+#define ACTION_ENDSH	2
+#define ACTION_PAN		3
+#define ACTION_PANEND	4
 
 
 Servo TiltServo, PanServo;
@@ -18,6 +19,9 @@ void setup()
 {
 	LEDPIN_PINMODE
 	LEDPIN_OFF
+
+	CHDKPIN_PINMODE
+	CHDKPIN_OFF
 
 	Serial.begin(9600);
 	Serial.print(F("// AutoKAP V"));
@@ -63,7 +67,12 @@ void loop()
 			break;
 		case ACTION_SHOOT:
 			// shoot per chdk
-			// ToDo
+			CHDKPIN_ON
+			NextAction = ACTION_ENDSH;
+			next = now + config.shoot;
+			break;
+		case ACTION_ENDSH:
+			CHDKPIN_OFF
 			TiltPosition = TiltPosition++;
 			if (TiltPosition > TILTPOSCOUNT || config.tilt[TiltPosition] == 0) {
 				NextAction = ACTION_PAN;

@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   commands.h
  * Author: tiggr
  *
@@ -14,7 +14,6 @@
 #define	COMMANDS_H
 
 extern SerialCommand SerialShell;
-extern int8_t submode;
 
 void ToggleLED();
 void Show();
