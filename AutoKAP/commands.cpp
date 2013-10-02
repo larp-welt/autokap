@@ -57,6 +57,7 @@ void Show() {
 		Serial.println(freeRAM());
 	} // end of if
 	if (strcmp(arg, "CFG") == 0) {
+		SerialShell.clearBuffer();
 		Serial.print(F("// AutoKAP configuration"));
 		Version();
 		Pause();
