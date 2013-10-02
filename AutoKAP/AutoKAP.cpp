@@ -19,6 +19,14 @@ void setup()
 	SerialShell.addCommand("SHW", Show);
 	SerialShell.addCommand("PRT", Echo);
 	SerialShell.addCommand("WRT", Write);
+	SerialShell.addCommand("VER", Version);
+	SerialShell.addCommand("PAUSE", Pause);
+	SerialShell.addCommand("SHT", Shoot);
+	SerialShell.addCommand("SHTP", Shootpause);
+	SerialShell.addCommand("PAN", Pan);
+	SerialShell.addCommand("SPD", Panspeed);
+	SerialShell.addCommand("ZERO", Neutral);
+	SerialShell.addCommand("TLT", Tilt);
 	SerialShell.addCommand("//", NoOp);
 	SerialShell.setDefaultHandler(UnknownCommand);
 	Serial.println(F("// - Serial communication started"));

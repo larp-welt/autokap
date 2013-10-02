@@ -10,6 +10,15 @@ You may use following commands on the serial console:
 
 |@//@|Marks a comment. Lines starting with @//@ will be ignored.|
 |@PRT <text>@|Prints out the the given text.|
-|@SHW RAM@|Shows the amount of still free RAM.|
+|@SHW RAM@|Shows the amount of still free RAM.| 
+|@SHW CFG@|Shows the complete configuration. The output can be used to reimport the settings.|
 |@LED <ON/OFF/TOGGLE>@|Switchs the led on or off, or inverts it state. Used without any argument, it shows the current state.|
 |@WRT@|Writes the current configuration to EEPROM.|
+|@VER@|Shows installed software version.|
+|@PAUSE <ms>@|Sets value between two tilt or rotation phases. If no value given, it shows the current setting.|
+|@SHT <ms>@|Sets duration of Shoot impuls for CHDK. If no value given, shows the current setting.|
+|@SHTP <ms>@|Pause after taking an image. If no value given, shows the current setting.|
+|@PAN <ms>@|Sets how long the rig will turn. If no value given, shows the current setting.|
+|@SPD <servo>@|Sets speed for pan rotation. Speed is given in impuls length for the servo. If no value given, shows the current setting.|
+|@ZERO <serv>@|Sets neutral position of RC for the pan servo. If no value given, shows the current setting.|
+|@TLT <servo>...@| Enter up to 5 tilt positions. Use @TLT@ without any parameter to show current settings.|

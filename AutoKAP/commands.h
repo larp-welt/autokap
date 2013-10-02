@@ -19,9 +19,20 @@ void ToggleLED();
 void Show();
 void Echo();
 void Write();
+void Version();
+void Pause();
+void Shoot();
+void Shootpause();
+void Pan();
+void Panspeed();
+void Neutral();
+void Tilt();
 
 void NoOp();
 void UnknownCommand(const char *command);
+
+
+void _setValue(char *cmd, int16_t &config);
 
 
 #endif	/* COMMANDS_H */
