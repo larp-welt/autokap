@@ -137,6 +137,15 @@ void Tilt() {
 } // end of Tilt()
 
 
+void Reset() {
+	config.signature = 0x0;
+	eepromWriteConfiguration();
+	eepromReadConfiguration();
+	eepromWriteConfiguration();
+	ok();
+} // end of reset
+
+
 void Write() {
 	eepromWriteConfiguration();
 	ok();

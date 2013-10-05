@@ -22,3 +22,4 @@ You may use following commands on the serial console:
 |@SPD <servo>@|Sets speed for pan rotation. Speed is given in impuls length for the servo. If no value given, shows the current setting.|
 |@ZERO <serv>@|Sets neutral position of RC for the pan servo. If no value given, shows the current setting.|
 |@TLT <servo>...@| Enter up to 5 tilt positions. Use @TLT@ without any parameter to show current settings.|
+|@RST@|Reset the configuration to default values.|

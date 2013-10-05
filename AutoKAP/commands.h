@@ -27,6 +27,7 @@ void Pan();
 void Panspeed();
 void Neutral();
 void Tilt();
+void Reset();
 
 void NoOp();
 void UnknownCommand(const char *command);

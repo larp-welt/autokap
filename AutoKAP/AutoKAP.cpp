@@ -27,6 +27,7 @@ void setup()
 	SerialShell.addCommand("SPD", Panspeed);
 	SerialShell.addCommand("ZERO", Neutral);
 	SerialShell.addCommand("TLT", Tilt);
+	SerialShell.addCommand("RST", Reset);
 	SerialShell.addCommand("//", NoOp);
 	SerialShell.setDefaultHandler(UnknownCommand);
 	Serial.println(F("// - Serial communication started"));
