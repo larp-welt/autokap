@@ -64,11 +64,13 @@ void loop()
 			break;
 		case ACTION_SHOOT:
 			// shoot per chdk
+			LEDPIN_ON
 			CHDKPIN_ON
 			NextAction = ACTION_ENDSH;
 			next = now + config.shoot;
 			break;
 		case ACTION_ENDSH:
+			LEDPIN_OFF
 			CHDKPIN_OFF
 			TiltPosition = TiltPosition++;
 			if (TiltPosition > TILTPOSCOUNT || config.tilt[TiltPosition] == 0) {

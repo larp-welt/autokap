@@ -159,10 +159,11 @@ void UnknownCommand(const char *command) { error(command); }
 
 
 void _setValue(char *cmd, int16_t &config) {
-	char *arg;
+	char* arg;
 
 	arg = SerialShell.next();
-	if (arg != NULL) {
+	Serial.print(arg);
+	if (arg == NULL) {
 		Serial.print(cmd);
 		Serial.print(F(" "));
 		Serial.println(config);
