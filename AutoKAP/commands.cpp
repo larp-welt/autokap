@@ -15,7 +15,13 @@ static int freeRAM() {
 return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
 } // end of freeRAM()
 
-static void ok() { Serial.println(F("OK")); }
+
+static void ok(char *cmd = NULL) {
+	Serial.print(F("// OK "));
+	if (cmd != NULL) { Serial.println(cmd); }
+	else { Serial.println(); }
+} // end of ok
+
 
 static void error(const char *errmsg) { 
 	Serial.print(F("ERROR: "));
@@ -35,7 +41,7 @@ void ToggleLED() {
 		Serial.println(onoff[state]);
 	} else {
 	if (strcmp(arg, "ON") == 0) {
-		ok();
+		ok("LED");
 		LEDPIN_ON
 	} else {
 	if (strcmp(arg, "OFF") == 0) {
@@ -58,7 +64,7 @@ void Show() {
 	} // end of if
 	if (strcmp(arg, "CFG") == 0) {
 		SerialShell.clearBuffer();
-		Serial.print(F("// AutoKAP configuration"));
+		Serial.print(F("// AutoKAP configuration "));
 		Version();
 		Pause();
 		Shoot();
@@ -119,7 +125,7 @@ void Tilt() {
 			values[i] = 0;
 		} else {
 			values[i] = atoi(arg);
-			set = i;
+			set = set++;
 		} // end of if
 	} // end of for
 
@@ -132,7 +138,7 @@ void Tilt() {
 		Serial.println();
 	} else {
 		for (int8_t i=0; i<5; i++) { config.tilt[i] = values[i]; }
-		ok();
+		ok("TLT");
 	} // end of if
 } // end of Tilt()
 
@@ -142,27 +148,26 @@ void Reset() {
 	eepromWriteConfiguration();
 	eepromReadConfiguration();
 	eepromWriteConfiguration();
-	ok();
+	ok("RST");
 } // end of reset
 
 
 void Write() {
 	eepromWriteConfiguration();
-	ok();
+	ok("WRT");
 } // end of Write()
 
 
 void NoOp() {;}
 
 
-void UnknownCommand(const char *command) { error(command); }
+void UnknownCommand(const char *cmd) { error(cmd); }
 
 
 void _setValue(char *cmd, int16_t &config) {
 	char* arg;
 
 	arg = SerialShell.next();
-	Serial.print(arg);
 	if (arg == NULL) {
 		Serial.print(cmd);
 		Serial.print(F(" "));
@@ -170,7 +175,7 @@ void _setValue(char *cmd, int16_t &config) {
 	} else {
 		if (atoi(arg) > 0) {
 			config = atoi(arg);
-			ok();
+			ok(cmd);
 		} else { error("unknown parameter"); }
 	} // end of if
 } // end of _setValue()
