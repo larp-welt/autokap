@@ -27,6 +27,7 @@ void setup()
 	SerialShell.addCommand("SPD", Panspeed);
 	SerialShell.addCommand("ZERO", Neutral);
 	SerialShell.addCommand("TLT", Tilt);
+	SerialShell.addCommand("STEP", Step);
 	SerialShell.addCommand("RST", Reset);
 	SerialShell.addCommand("//", NoOp);
 	SerialShell.setDefaultHandler(UnknownCommand);
@@ -37,7 +38,11 @@ void setup()
 
 
 	TiltServo.attach(TILT_SERVO);
+	TiltServo.writeMicroseconds(config.tilt[0]);
+	currentTilt = config.tilt[0];
+
 	PanServo.attach(PAN_SERVO);
+	PanServo.writeMicroseconds(config.neutral);
 
 	Serial.println(F("// - Starting KAP"));
 	signalLed("---");
@@ -45,22 +50,43 @@ void setup()
 }
 
 
+void moveServos() {
+	static unsigned long next = 0;
+
+	if (millis() >= next) {
+		if (config.tilt[TiltPosition] != currentTilt) {
+			int16_t diff;
+			diff = config.tilt[TiltPosition] - currentTilt;
+			if (diff > 0) { currentTilt = currentTilt + config.step; }
+			if (diff < 0) { currentTilt = currentTilt - config.step; }
+			if (abs(diff) < config.step) { currentTilt = config.tilt[TiltPosition]; }
+			TiltServo.writeMicroseconds(currentTilt);
+		} // end of if
+
+		next = millis() + 10;
+	} // end of if
+} // end of moveServos
+
 // The loop function is called in an endless loop
 void loop()
 {
 	unsigned long now;
 
 	SerialShell.readSerial();
+	moveServos();
 
 	now = millis();
 
 	if (now >= next) {
 		switch (NextAction) {
 		case ACTION_TILT:
-			// tilt
-			TiltServo.writeMicroseconds(config.tilt[TiltPosition]);
-			NextAction = ACTION_SHOOT;
-			next = now + config.pause;
+			// wait until position is reached!
+			if (config.tilt[TiltPosition] == currentTilt) {
+				NextAction = ACTION_SHOOT;
+				next = now + config.pause;
+			} else {
+				next = now + 10;
+			} // end of if
 			break;
 		case ACTION_SHOOT:
 			// shoot per chdk
@@ -72,6 +98,10 @@ void loop()
 		case ACTION_ENDSH:
 			LEDPIN_OFF
 			CHDKPIN_OFF
+			next = now + config.shotpause;
+			NextAction = ACTION_SHOOTPAUSE;
+			break;
+		case ACTION_SHOOTPAUSE:
 			TiltPosition = TiltPosition++;
 			if (TiltPosition > TILTPOSCOUNT || config.tilt[TiltPosition] == 0) {
 				NextAction = ACTION_PAN;
@@ -79,11 +109,9 @@ void loop()
 			} else {
 				NextAction = ACTION_TILT;
 			}
-			next = now + config.shotpause;
 			break;
 		case ACTION_PAN:
 			// pan start
-			TiltServo.writeMicroseconds(config.tilt[TiltPosition]);
 			PanServo.writeMicroseconds(config.panspeed);
 			next = now + config.pan;
 			NextAction = ACTION_PANEND;
@@ -91,7 +119,7 @@ void loop()
 		case ACTION_PANEND:
 			PanServo.writeMicroseconds(config.neutral);
 			next = now + config.pause;
-			NextAction = ACTION_SHOOT;
+			NextAction = ACTION_TILT;
 			break;
 		} // end of switch
 	} // end of if

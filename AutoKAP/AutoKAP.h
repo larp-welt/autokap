@@ -16,15 +16,17 @@
 #include "commands.h"
 #include "utils.h"
 
-#define ACTION_TILT		0
-#define ACTION_SHOOT	1
-#define ACTION_ENDSH	2
-#define ACTION_PAN		3
-#define ACTION_PANEND	4
+#define ACTION_TILT			0
+#define ACTION_SHOOT		1
+#define ACTION_ENDSH		2
+#define ACTION_SHOOTPAUSE	3
+#define ACTION_PAN			4
+#define ACTION_PANEND		5
 
 Servo TiltServo, PanServo;
 unsigned long next = 0;
 char TiltPosition = 0;
+int16_t currentTilt;
 char NextAction = ACTION_TILT;
 
 #ifdef __cplusplus
@@ -37,6 +39,8 @@ void setup();
 #endif
 
 //add your function definitions for the project AutoKAP here
+
+void moveServos();
 
 
 //Do not add code below this line

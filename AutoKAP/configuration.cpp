@@ -28,6 +28,7 @@ void eepromReadConfiguration() {
 		config.tilt[2] = 1500;
 		config.tilt[3] = 1800;
 		config.tilt[4] = 0;
+		config.step = 2;
 	}
 }
 

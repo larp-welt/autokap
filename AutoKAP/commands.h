@@ -27,6 +27,7 @@ void Pan();
 void Panspeed();
 void Neutral();
 void Tilt();
+void Step();
 void Reset();
 
 void NoOp();

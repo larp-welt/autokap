@@ -73,6 +73,7 @@ void Show() {
 		Panspeed();
 		Neutral();
 		Tilt();
+		Step();
 	} // end of if
 } // end of Show()
 
@@ -111,7 +112,7 @@ void Pan() { _setValue("PAN", config.pan); }
 void Panspeed() { _setValue("SPD", config.panspeed); }
 
 
-void Neutral() { _setValue("ZERO", config.panspeed); }
+void Neutral() { _setValue("ZERO", config.neutral); }
 
 
 void Tilt() {
@@ -141,6 +142,9 @@ void Tilt() {
 		ok("TLT");
 	} // end of if
 } // end of Tilt()
+
+
+void Step() { _setValue("STEP", config.step); }
 
 
 void Reset() {

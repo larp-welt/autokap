@@ -9,7 +9,7 @@
 #define	CONFIGURATION_H
 
 #define EEPROM_SIGNATURE         0x414B4150
-#define EEPROM_CONF_VERSION      3
+#define EEPROM_CONF_VERSION      4
 
 #include "def.h"
 
@@ -23,6 +23,7 @@ struct config_t {
 	int16_t panspeed;
 	int16_t neutral;
 	int16_t tilt[TILTPOSCOUNT+1];
+	int16_t step;
 };
 
 extern config_t config;

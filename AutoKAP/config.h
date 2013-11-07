@@ -8,8 +8,8 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define TILT_SERVO	12
-#define PAN_SERVO	11
+#define TILT_SERVO	3
+#define PAN_SERVO	5
 
 
 #endif /* CONFIG_H_ */
