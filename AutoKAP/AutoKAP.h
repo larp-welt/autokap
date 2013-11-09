@@ -11,7 +11,7 @@
 
 #include "def.h"
 #include "config.h"
-#include "extern/SerialCommand.h"
+#include "SerialCommand.h"
 #include "configuration.h"
 #include "commands.h"
 #include "utils.h"
