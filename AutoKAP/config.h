@@ -11,5 +11,7 @@
 #define TILT_SERVO	3
 #define PAN_SERVO	5
 
+#define SERIAL_SPEED	38400
+
 
 #endif /* CONFIG_H_ */
