@@ -11,7 +11,7 @@ void setup()
 	CHDKPIN_PINMODE
 	CHDKPIN_OFF
 
-	Serial.begin(9600);
+	Serial.begin(38400);
 	Serial.print(F("// AutoKAP V"));
 	Serial.println(VERSION);
 
